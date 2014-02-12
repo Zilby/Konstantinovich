@@ -8,9 +8,5 @@ public class Driver{
 	    f = new Mazesolver(args[0]);
 	}
 	f.solve();
-
-
-
     }
-
 }
