@@ -25,6 +25,20 @@ public class Hail {
 	}
     }
     
+    public static int longestHail(int i){
+	return longHelp(i,1);
+    }
+
+    public static int longHelp(int i, int j){
+	if(i==1){
+	    return j;
+	} else if (hailLen(i)>hailLen(j)){
+	    return longHelp(i-1, i);
+	} else {
+	    return longHelp(i-1, j);
+	}
+    }
+    
     public static void main(String[] args) {
 	System.out.print("hail(5): ");
 	hail(5);
@@ -35,6 +49,13 @@ public class Hail {
 	System.out.print("hailLen(5): " + hailLen(5) + "\n");
 	System.out.print("hailLen(6): " + hailLen(6) + "\n");
 	System.out.print("hailLen(7): " + hailLen(7) + "\n");
+	System.out.print("longestHail(1): " + longestHail(1) + "\n");
+	System.out.print("longestHail(2): " + longestHail(2) + "\n");
+	System.out.print("longestHail(3): " + longestHail(3) + "\n");
+	System.out.print("longestHail(4): " + longestHail(4) + "\n");
+	System.out.print("longestHail(5): " + longestHail(5) + "\n");
+	System.out.print("longestHail(6): " + longestHail(6) + "\n");
+	System.out.print("longestHail(7): " + longestHail(7) + "\n");
     }
 
 }
