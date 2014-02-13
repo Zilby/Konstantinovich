@@ -2,11 +2,11 @@ import java.util.*;
 import java.io.*;
 public class Mazesolver{
 
-    private char[][]maze;
-    private int maxx,maxy;
+    private char[][]maze; //arraylist for the whole maze
+    private int maxx,maxy; //width and height of maze
     private int startx,starty;
     private boolean solved = false;
-    private boolean foundstart = false;
+    private boolean foundstart = false; //for the starting spot
 
     public Mazesolver(String filename){
 	String ans = "";
@@ -30,7 +30,7 @@ public class Mazesolver{
 	    e.printStackTrace();
 	    System.exit(0);
 	}
-
+	//makes the text into an int[][] and sets the startx/y
 	maze = new char[maxx][maxy];
 	for(int i=0;i<ans.length();i++){
 	    char c = ans.charAt(i);
@@ -75,21 +75,25 @@ public class Mazesolver{
 	    System.out.println("No starting point 'S' found in maze.");
 	}else{
 	    maze[startx][starty]=' ';
-	    solve(maze,startx,starty);
+	    solve(startx,starty);
 	}
     }
 
-    public void solve(char[][]maze,int x,int y){
-	wait(20);
-	System.out.println(this);
-	if(maze[x][y] == 'X'){
-	    solved = true; 
-	}else if(maze[x][y] == '#'){
-	    
-
-	//try to solve the maze here...
-
+    public void solve(int x,int y){
+	if(!solved){
+	    wait(50);
+	    System.out.println(this); //print out the toString
+	    if(maze[x][y] == 'X'){ //if spot is end
+		solved = true; 
+	    }else if(maze[x][y] == ' '){//else if space
+		maze[x][y]='@'; //fill in @ sign
+		solve(x,y+1); //try to solve up
+		solve(x-1,y); //left
+		solve(x+1,y); //right
+		solve(x,y-1); //down
+		if(!solved)maze[x][y]=' '; //if it isn't solved then [x][y] is space
+		//...how does this get rid of @s though?
+	    }
+	}
     }
-
-
 }
