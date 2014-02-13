@@ -38,7 +38,7 @@ public class Hail {
 	    return longHelp(i-1, j);
 	}
     }
-    
+
     public static void main(String[] args) {
 	System.out.print("hail(5): ");
 	hail(5);

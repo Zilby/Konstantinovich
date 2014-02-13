@@ -82,7 +82,11 @@ public class Mazesolver{
     public void solve(char[][]maze,int x,int y){
 	wait(20);
 	System.out.println(this);
-	
+	if(maze[x][y] == 'X'){
+	    solved = true; 
+	}else if(maze[x][y] == '#'){
+	    
+
 	//try to solve the maze here...
 
     }
