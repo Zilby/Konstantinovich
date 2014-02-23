@@ -92,7 +92,6 @@ public class Mazesolver{
 		solve(x+1,y); //right
 		solve(x,y-1); //down
 		if(!solved)maze[x][y]=' '; //if it isn't solved then [x][y] is space
-		//...how does this get rid of @s though?
 	    }
 	}
     }
