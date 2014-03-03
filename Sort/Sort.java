@@ -69,6 +69,6 @@ public class Sort{
 
     public static void main(String[] args) {
 	printArray(merge(testa,testb));
-	printArray(msort(testc));
+	msort(testc);
     }
 }
