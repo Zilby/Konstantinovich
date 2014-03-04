@@ -31,27 +31,20 @@ public class Sort{
 	return output;
     }
 
-    //void msort(int[]a)
-    //     if(length > 1)
-    //         make 2 smaller arrays
-    //         copy a to the small arrays (split function)
-    //         msort each half
-    //         ans = merge (L1, L2)
-    //         copy ans to a
-
     public static void copy(int[] source, int[] dest, int start){
 	for(int i=0;i<dest.length;i++){
 	    dest[i] = source[start];
 	    start++;
 	}
     }
+
     public static void msort(int[] a){
 	if(a.length > 1){
 	    int[] ans = new int[a.length];
 	    int[] L1 = new int[a.length/2];
 	    int[] L2 = new int[a.length-(a.length/2)];
 	    copy(a, L1, 0);
-	    copy(a, L2, (a.length-(a.length/2)));
+	    copy(a, L2, (a.length/2));
 	    msort(L1);
 	    msort(L2);
 	    ans = merge(L1, L2);
@@ -70,5 +63,6 @@ public class Sort{
     public static void main(String[] args) {
 	printArray(merge(testa,testb));
 	msort(testc);
+	printArray(testc);
     }
 }
