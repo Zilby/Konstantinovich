@@ -9,8 +9,7 @@ public class Sort{
 
     public static int[] merge(int[] a, int[] b){
 	int[] output = new int[(a.length)+(b.length)];
-	int aCount = 0;
-	int bCount = 0;
+	int aCount = 0, bCount = 0;
 	for(int i=0;i<output.length;i++){
 	    if(aCount == a.length){
 		output[i]=b[bCount];
@@ -31,6 +30,21 @@ public class Sort{
 	return output;
     }
 
+    // public static int[] mergeK(int[]a,int[]b){
+    // 	int[]res = new int[a.length+b.length];
+    // 	int ia=0,ib=0; //index a
+    // 	while(ia<a.length || ib<b.length){
+    // 	    if(ia<a.length && (ib>=b.length || a[ia]<b[ib])){
+    // 		res[ia+ib]= a[ia];
+    // 		ia++;
+    // 	    }else{
+    // 		res[ia+ib]= b[ib];
+    // 		ib++;
+    // 	    }
+    // 	}
+    // 	return res;
+    // }
+
     public static void copy(int[] source, int[] dest, int start){
 	for(int i=0;i<dest.length;i++){
 	    dest[i] = source[start];
@@ -38,11 +52,17 @@ public class Sort{
 	}
     }
 
+    // public static void copyK(int[]source,int sstart, int[]dest, int dstart, int count){
+    // 	for(int i=0;i<count;i++){
+    // 	    dest[dstart+i]=source[sstart+i];
+    // 	}
+    // } //this doesn't make assumptions about inputs
+
     public static void msort(int[] a){
 	if(a.length > 1){
 	    int[] ans = new int[a.length];
 	    int[] L1 = new int[a.length/2];
-	    int[] L2 = new int[a.length-(a.length/2)];
+	    int[] L2 = new int[a.length-L1.length];
 	    copy(a, L1, 0);
 	    copy(a, L2, (a.length/2));
 	    msort(L1);
@@ -52,6 +72,25 @@ public class Sort{
 	}
     }
     
+    // public static void msortK(int[ary]){
+    // 	//exit when size == 1
+    // 	if(ary.length<2)return;
+    // 	//make an array to store each half
+    // 	int[]halfL,halfR;
+    // 	halfL=new int[ary.length/2];
+    // 	halfR=new int[(ary.length+1)/2];
+    // 	//copy the two halves to smaller arrays
+    // 	copy(ary,0           ,halfL,0,halfL.length);
+    // 	copy(ary,halfL.length,halfR,0,halfR.length);
+    // 	//sort the two halves
+    // 	msortK(halfL);
+    // 	msortK(halfR);
+    // 	//merge the two halves
+    // 	int[]res = mergeK(halfL,halfR);
+    // 	//copy res of merging to ary
+    // 	copy(res,0,ary,0,ary.length);
+    // }
+
     public static void printArray(int[] output){
 	String stringout = "";
 	for(int j=0;j<output.length;j++){
