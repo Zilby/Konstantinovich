@@ -1,0 +1,45 @@
+		              GOAL: Quickly select the Kth smallest element
+
+				      find the Kth smallest element
+
+				          (2nd smallest element)
+
+	        1) naive way:
+   		              repeat this: find smallest, remove it until you get to Kth element
+	 		      O(n^2) (eg: list of 2, you go through 2+1, list of 3 you go through
+	 	    		          3+2+1, list of 4 you go through 4+3+2+1, etc.)
+
+                2) sort first: ======================>  O(nlog(n)) } O(nlog(n)
+     	                get the value at index k-1 ==>  O(n)       } same ^^^
+
+Finding the 5th smallest element (starting at 0)
+
+  0 1 2 3 4  5  6 7 8 9
+[16 9 4 2 7 (3) 5 8 1 0]
+
+    0 1 2  3  4 5  6  7 8 9
+==>[2 1 0 {3} 8 5 (7) 4 9 16] -only 3 is in correct spot but organized such that
+       	     |--------------|  only numbers < 3 are on left and > 3 on right
+
+             4  5  6  7  8 9
+==>        [(5) 4 {7} 16 9 8]
+	   |-----|
+
+            4 5
+==>        [4 5]
+              * <== yes!
+
+ie: n+(n/2)+(n/4)+(n/8) } n+n
+QUICK SELECT O(n)
+
+
+public int kth(int[] L, int k){
+       return kth(L,k-1,0,L.length);
+}
+
+public int kth(int[] L,int i,int left,int right){
+       if(i //is bad)
+           return L[i]; //throws index out of bounds exception
+       //write quick select 
+       //stuff in here
+}
