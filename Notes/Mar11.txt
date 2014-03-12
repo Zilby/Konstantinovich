@@ -34,7 +34,7 @@ QUICK SELECT O(n)
 
 
 public int kth(int[] L, int k){
-       return kth(L,k-1,0,L.length);
+       return kth(L,k-1,0,L.length-1);
 }
 
 public int kth(int[] L,int i,int left,int right){
