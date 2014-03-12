@@ -2,12 +2,12 @@ import java.io.*;
 import java.util.*;
 
 public class Sorts{
-
-    public static ArrayList<String> test = new ArrayList<String>();
-	test = {"potato","wubjub","humuna","wiki","jujube","gawd","jojo","fuacate"};
     
     public static ArrayList<String> merge(ArrayList<String> a, ArrayList<String> b){
-	ArrayList<String> output = new ArrayList<String>(a.size()+b.size());
+	ArrayList<String> output = new ArrayList<String>();
+	for(int i=0;i<a.size()+b.size();i++){
+	    output.add("0");
+	}
 	int aCount = 0, bCount = 0;
 	for(int i=0;i<output.size();i++){
 	    if(aCount == a.size()){
@@ -39,11 +39,20 @@ public class Sorts{
     //use .compartTo() in order to compare, order in greatness
     public static void msort(ArrayList<String> a){ 
 	if(a.size() > 1){
-	    ArrayList<String> ans = new ArrayList<String>(a.size());
-	    ArrayList<String> L1 = new ArrayList<String>(a.size()/2);
-	    ArrayList<String> L2 = new ArrayList<String>(a.size()-L1.size());
-	    copy(a, L1, 0);
-	    copy(a, L2, (a.size()/2));
+	    ArrayList<String> ans = new ArrayList<String>();
+	    for(int i=0;i<a.size();i++){
+		ans.add(a.get(i));
+	    }
+	    ArrayList<String> L1 = new ArrayList<String>();
+	    for(int i=0;i<a.size()/2;i++){
+		L1.add(a.subList(0,a.size()/2).get(i));
+	    }
+	    ArrayList<String> L2 = new ArrayList<String>();
+	    for(int i=0;i<a.size()-L1.size();i++){
+		L2.add(a.subList(L1.size(),a.size()).get(i));
+	    }
+	    //copy(a, L1, 0);
+	    //copy(a, L2, (a.size()/2));
 	    msort(L1);
 	    msort(L2);
 	    ans = merge(L1, L2);
@@ -61,10 +70,5 @@ public class Sorts{
 	    stringout += output.get(j) + " ";
 	}
 	System.out.println(stringout);
-    }
-
-    public static void main(String[] args) {
-	msort(test);
-	printArray(test);
     }
 }
