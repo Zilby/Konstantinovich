@@ -12,8 +12,8 @@ public class QSelect{
 
     public static int partition(int[]L,int left,int right){
 	Random r = new Random();
-	int p = r.nextInt(right);
-	System.out.println(p);
+	int p = r.nextInt(right+1);
+	//System.out.println(p);
 	int[] temp = new int[right+1];
 	for(int i=0;i<L.length;i++){
 	    if(L[i]>L[p]){
@@ -28,9 +28,29 @@ public class QSelect{
 	    }
 	}
 	L = temp;
-	printArray(L);
-	return L[p];
+	//printArray(L);
+	return p;
     }
+
+    public int quickselect(int[] A, int k){
+	if(k<1||k>A.length){
+	    return A[k-1];
+	}
+	return quickselect(A,k-1,0,A.length-1);
+    }
+
+    public static int quickselect(int[]A,int k,int left,int right){
+	int pindex = partition(A,left,right);
+	if(k == pindex){
+	    return A[pindex];
+	}
+	if(k > pindex){
+	    return quickselect(A,k,left,pindex-1);
+	} else {
+	    return quickselect(A,k,pindex+1,right);
+	}
+    }
+		
 
     public static void printArray(int[] output){
 	String stringout = "";
@@ -44,6 +64,6 @@ public class QSelect{
 
 	int[] test = {1,9,7,4,3,5,-1};
 
-	System.out.println(partition(test,0,test.length-1));
+	System.out.println(quickselect(test,5,0,test.length-1));
     }
 }

@@ -1,0 +1,25 @@
+left	    pivot \   right
+    \	           6  /
+     8 -1 6 7 -5 3 0 9
+     
+1)   take pivot all the way to right
+
+     8 -1 6 7 -5 3 9 | 0 
+     L 	      	   R
+
+2)   farthest left: 8, must go to right, because it is greater than 0
+     
+     9 -1 6 7 -5 3 8 | 0
+     L           R
+
+3)   3 -1 6 7 -5 9 8 | 0
+     L         R
+
+4)   -5 -1 6 7 3 9 8 | 0
+     L       R
+
+5)   -1 -5 6 7 3 9 8 | 0
+         L   R
+
+6)   6 -5 -1 7 3 9 8 | 0
+           L R
