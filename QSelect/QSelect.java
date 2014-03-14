@@ -31,6 +31,28 @@ public class QSelect{
 	}
     }
 
+    public static int partition2(int[]L,int left,int right){
+	Random r = new Random();
+	int pindex = left + r.nextInt(right-left+1);
+	int p = L[pindex];
+	L[pindex] = L[right];
+	L[right] = p;
+	int repeat = 0;
+	for(int i=left;i<right;i++){
+	    if(L[i]<p){
+		int t = L[left];
+		L[left] = L[i];
+		L[i] = t;
+	    } else if(L[i]==p){
+		repeat++;
+	    }
+	}
+	int t = L[left];
+	L[left] = L[right];
+	L[right] = t;
+	
+    }
+
     public static int quickSelect(int[]A, int k){
 	if(k<1||k>A.length){
 	    return A[k-1];
@@ -50,21 +72,30 @@ public class QSelect{
 	}
     }
     
-    public static int[] quickSort(int[]A){
+    public static void quickSort(int[]A){
 	quickSort(A,0,A.length-1);
-	return A;
     }
 
     public static void quickSort(int[]A,int left,int right){
-	if(right-left>1){
-	    int pindex = partition(A,left,right);
-	    quickSort(A,left,pindex-1);
-	    quickSort(A,pindex+1,right);
-	} else {
-	    if (right>left){
-		int pindex = partition(A,left,right);
-	    }
+	//less efficient
+
+	// if(right-left>1){
+	//     int pindex = partition(A,left,right);
+	//     quickSort(A,left,pindex-1);
+	//     quickSort(A,pindex+1,right);
+	// } else {
+	//     if (right>left){
+	// 	int pindex = partition(A,left,right);
+	//     }
+	// }
+	
+	if(right-left<1){
+	    return;
 	}
+	int pindex = partition(A,left,right);
+	quickSort(A,left,pindex-1);
+	quickSort(A,pindex+1,right);
+	
     }
 	
 
