@@ -4,34 +4,6 @@ import java.util.*;
 public class QSelect{
 
     public static int partition(int[]L,int left,int right){
-	if(left != right){
-	    Random r = new Random();
-	    int p = left + r.nextInt(right-left+1);
-	    int[] temp = new int[L.length];
-	    int boundsL = left;
-	    int boundsR = right;
-	    for(int i=boundsL;i<=boundsR;i++){
-		if(L[i]>L[p]){
-		    temp[right]=L[i];
-		    right--;
-		} else if(i != p) {
-		    temp[left]=L[i];
-		    left++;
-		} 
-		if(i == boundsR){
-		    temp[left]=L[p];
-		}
-	    }
-	    for(int j=boundsL;j<=boundsR;j++){
-		L[j]=temp[j];
-	    }
-	    return left;
-	} else {
-	    return left;
-	}
-    }
-
-    public static int partition2(int[]L,int left,int right){
 	Random r = new Random();
 	int pindex = left + r.nextInt(right-left+1);
 	int p = L[pindex];
@@ -43,14 +15,23 @@ public class QSelect{
 		int t = L[left];
 		L[left] = L[i];
 		L[i] = t;
-	    } else if(L[i]==p){
+		left++;
+	    }else if(L[i]==p){
 		repeat++;
+	    }
+	}
+	for(int j=left;j<right;j++){
+	    if(L[j]==p){
+		int t = L[left];
+		L[left] = L[j];
+		L[j] = t;
+		left++;
 	    }
 	}
 	int t = L[left];
 	L[left] = L[right];
 	L[right] = t;
-	
+	return left-(repeat/2);
     }
 
     public static int quickSelect(int[]A, int k){
@@ -77,18 +58,6 @@ public class QSelect{
     }
 
     public static void quickSort(int[]A,int left,int right){
-	//less efficient
-
-	// if(right-left>1){
-	//     int pindex = partition(A,left,right);
-	//     quickSort(A,left,pindex-1);
-	//     quickSort(A,pindex+1,right);
-	// } else {
-	//     if (right>left){
-	// 	int pindex = partition(A,left,right);
-	//     }
-	// }
-	
 	if(right-left<1){
 	    return;
 	}
@@ -107,10 +76,18 @@ public class QSelect{
 	System.out.println(stringout);
     }
 
+    public static void randArray(int[] A, int param){
+	Random r = new Random();
+	for(int i=0;i<A.length;i++){
+	    A[i]=r.nextInt(param);
+	}
+    }
+
     public static void main(String[]args){
 
 	int[] test = {1,9,7,4,3,5,-1};
-	
+	int[] test2 = new int[100];
+	//QSELECT TESTS
 	// System.out.println(quickSelect(test,1));
 	// System.out.println(quickSelect(test,2));
 	// System.out.println(quickSelect(test,3));
@@ -118,7 +95,66 @@ public class QSelect{
 	// System.out.println(quickSelect(test,5));
 	// System.out.println(quickSelect(test,6));
 	// System.out.println(quickSelect(test,7));
+	
+	//QSORT TEST 1
 	quickSort(test);
 	printArray(test);
+
+	//QSORT TEST 2
+	randArray(test2,10);
+	printArray(test2);
+	quickSort(test2);
+	printArray(test2);
+
+	//OLD PARTITION TESTS
+	// System.out.println("\n"+partition(test2,0,test2.length-1));
+	// printArray(test2);
+	// System.out.println(partition(test2,5,test2.length-7));
+	// printArray(test2);
+	// System.out.println(partition(test2,3,test2.length-11));
+	// printArray(test2);
     }
 }
+
+//PREVIOUS VERSIONS
+
+    // public static int partition(int[]L,int left,int right){
+    // 	if(left != right){
+    // 	    Random r = new Random();
+    // 	    int p = left + r.nextInt(right-left+1);
+    // 	    int[] temp = new int[L.length];
+    // 	    int boundsL = left;
+    // 	    int boundsR = right;
+    // 	    for(int i=boundsL;i<=boundsR;i++){
+    // 		if(L[i]>L[p]){
+    // 		    temp[right]=L[i];
+    // 		    right--;
+    // 		} else if(i != p) {
+    // 		    temp[left]=L[i];
+    // 		    left++;
+    // 		} 
+    // 		if(i == boundsR){
+    // 		    temp[left]=L[p];
+    // 		}
+    // 	    }
+    // 	    for(int j=boundsL;j<=boundsR;j++){
+    // 		L[j]=temp[j];
+    // 	    }
+    // 	    return left;
+    // 	} else {
+    // 	    return left;
+    // 	}
+    // }
+
+
+// public static void quickSort(int[]A,int left,int right){
+//     if(right-left>1){
+// 	int pindex = partition(A,left,right);
+// 	quickSort(A,left,pindex-1);
+// 	quickSort(A,pindex+1,right);
+//     } else {
+// 	if (right>left){
+// 	    int pindex = partition(A,left,right);
+// 	}
+//     }
+// }
