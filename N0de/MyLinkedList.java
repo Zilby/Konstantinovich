@@ -15,44 +15,52 @@ public class MyLinkedList{
 	head=temp;
     }
 
-    // public void add(String s,int position){
-    // 	Node temp = new Node(s);
-    // 	Node current = temp; 
-    // 	current.setNext(head);
-    // 	while(position>0){
-    // 	    current.setNext(current.getNext().getNext());
-    // 	}
-    // 	//incomplete
-    // }
-
-    public String get(int position){
-	Node temp = new Node("");
-	temp.setNext(head);
-	while(position>0){
-	    temp.setNext(temp.getNext().getNext());
-	    position--;
+    public void add(String s,int i) throws Exception{
+	Node temp = new Node(s);
+	if(i==0){
+	    temp.setNext(head);
+	    head=temp;
+	}else{
+	    Node current = getNode(i-1);
+	    temp.setNext(current.getNext());
+	    current.setNext(temp);
 	}
-	return temp.getNext().getData();
     }
 
-    public void set(int position,String newString){
+    //make it so   head or -1          0        1        2       }len = 3
+    //                    [   ] -->  [   ] -->[   ] -->[   ]
+
+    public Node getNode(int position) throws Exception{
 	Node temp = new Node("");
+	if(position<0){
+	    throw new Exception("(-) index out of bounds");
+	}
 	temp.setNext(head);
 	while(position>0){
-	    temp.setNext(temp.getNext().getNext());
+	    if(temp.getNext()==null){
+		throw new Exception("(+) index out of bounds");
+	    }else{
+		temp.setNext(temp.getNext().getNext());
+	    }
 	    position--;
 	}
-	temp.getNext().setData(newString);
+	return temp.getNext();
     }
 
-    // public void remove(int position){
-    // }
+    public String get(int position) throws Exception{
+	return getNode(position).getData();
+    }
+    
+
+    public void set(int position,String newString) throws Exception{
+    	getNode(position).setData(newString);
+    }
 
     public int find(String s){
 	Node temp = new Node("");
 	int current = 0;
 	temp.setNext(head);
-	while(temp.getNext!=null){
+	while(temp.getNext()!=null){
 	    if(temp.getNext().getData().equals(s)){
 		return current;
 	    }
@@ -60,6 +68,32 @@ public class MyLinkedList{
 	    current++;
 	}
 	return -1;
+    }
+
+    public int length(){
+	return lengthHelper(head+1);
+    }
+
+    public int lengthHelper(Node n){
+	if(n==null){
+	    return 0;
+	}else{
+	    return 1+lengthHelper(n.getNext());
+	}
+    }
+
+    public String toString(){
+	String s="[";
+	Node current=head;//getNode(0);
+	while(current!=null){
+	    if(current.getNext()!=null){
+		s+=current.getData()+",";
+	    }else{
+		s+=current.getData();
+	    }
+	    current=current.getNext();
+	}
+	return s+"]";
     }
 
     public static void main(String[] args){
