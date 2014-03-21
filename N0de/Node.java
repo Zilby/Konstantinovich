@@ -5,21 +5,17 @@ public class Node{
 
     private String data;
     private Node next;
-    private Node head;
+    
+    public Node(){
+	this.data=null;
+    }
     
     public Node(String data){
 	this.data=data;
-	if(head==null){
-	    head.setNext(this);
-	}
     }
 
     public Node getNext(){
 	return next;
-    }
-
-    public Node getHead(){
-	return head;
     }
 
     public String getData(){
@@ -28,10 +24,6 @@ public class Node{
 
     public void setNext(Node next){
 	this.next=next;
-    }
-
-    public void setHead(Node head){
-	this.head=head;
     }
 
     public void setData(String data){
