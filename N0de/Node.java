@@ -33,6 +33,6 @@ public class Node<T>{
     }
 
     public String toString(){
-	return data+"";
+	return data.toString();
     }
 }
