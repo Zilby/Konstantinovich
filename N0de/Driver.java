@@ -4,7 +4,7 @@ import java.util.*;
 public class Driver{
 
     public static void main(String[] args){
-	MyLinkedList LL = new MyLinkedList();
+	MyLinkedList<String> LL = new MyLinkedList<String>();
 	// Node l = new Node("alpha");
 	// Node m = new Node("bravo");
 	// Node n = new Node("charlie");

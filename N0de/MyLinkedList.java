@@ -1,23 +1,24 @@
 import java.io.*;
 import java.util.*;
 
-public class MyLinkedList{
+public class MyLinkedList<T>{
     
-    private Node head=new Node("head");
+    private Node<T> head=new Node<T>();
     private int L = 0;
     
     public void MyLinkedList(){
+	//head=new Node("head");
     }
 
-    public void add(String s,int i){
-	Node temp = new Node(s);
+    public void add(T s,int i){
+	Node<T> temp = new Node<T>(s);
 	if(i==0){
 	    if(L!=0){
 		temp.setNext(head.getNext());
 	    }	
 	    head.setNext(temp);
 	}else{
-	    Node current = getNode(i-1);
+	    Node<T> current = getNode(i-1);
 	    temp.setNext(current.getNext());
 	    current.setNext(temp);
 	}
@@ -41,8 +42,8 @@ public class MyLinkedList{
     //make it so   head or -1          0        1        2       }len = 3
     //                    [   ] -->  [   ] -->[   ] -->[   ]
 
-    public Node getNode(int position) throws IndexOutOfBoundsException{
-	Node temp = new Node("");
+    public Node<T> getNode(int position) throws IndexOutOfBoundsException{
+	Node<T> temp = new Node<T>();
 	if(position<0||position>L-1){
 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
 	}
@@ -58,7 +59,7 @@ public class MyLinkedList{
 	return temp.getNext();
     }
 
-    public String get(int position) throws IndexOutOfBoundsException{
+    public T get(int position) throws IndexOutOfBoundsException{
 	if(position<0||position>L-1){
 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
 	}
@@ -66,15 +67,15 @@ public class MyLinkedList{
     }
     
 
-    public void set(int position,String newString) throws IndexOutOfBoundsException{
+    public void set(int position,T newT) throws IndexOutOfBoundsException{
 	if(position<0||position>L-1){
 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
 	}
-    	getNode(position).setData(newString);
+    	getNode(position).setData(newT);
     }
 
-    public int find(String s){
-	Node temp = new Node("");
+    public int find(T s){
+	Node<T> temp = new Node<T>();
 	int current = 0;
 	temp.setNext(head.getNext());
 	while(temp.getNext()!=null){
