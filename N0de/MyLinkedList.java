@@ -13,31 +13,30 @@ public class MyLinkedList<T>{
     }
 
     public void add(T s){
-	Node<T> temp = new Node<T>();
+	Node<T> temp = new Node<T>(s);
 	tail.setNext(temp);
 	tail=temp;
-	if(L>0){
-	    L++;
-	}
+	L++;
     }
 	
 
     public void add(T s,int i){
 	if(i==L){
 	    add(s);
+	} else {
+	    Node<T> temp = new Node<T>(s);
+	    if(i==0){
+		if(L!=0){
+		    temp.setNext(head.getNext());
+		}	
+		head.setNext(temp);
+	    }else{
+		Node<T> current = getNode(i-1);
+		temp.setNext(current.getNext());
+		current.setNext(temp);
+	    }
+	    L++;
 	}
-	Node<T> temp = new Node<T>(s);
-	if(i==0){
-	    if(L!=0){
-		temp.setNext(head.getNext());
-	    }	
-	    head.setNext(temp);
-	}else{
-	    Node<T> current = getNode(i-1);
-	    temp.setNext(current.getNext());
-	    current.setNext(temp);
-	}
-	L++;
     }
 
     public void remove(int i)throws IndexOutOfBoundsException{
@@ -47,15 +46,13 @@ public class MyLinkedList<T>{
 	if(i==0){
 	    head.setNext(getNode(i+1));
 	}else if(i==L-1){
-	    getNode(i-1).setNext(null);
+	    tail=getNode(i-1);
+	    tail.setNext(null);
 	}else{
 	getNode(i-1).setNext(getNode(i+1));
 	}
 	L--;
     }
-
-    //make it so   head or -1          0        1        2       }len = 3
-    //                    [   ] -->  [   ] -->[   ] -->[   ]
 
     public Node<T> getNode(int position) throws IndexOutOfBoundsException{
 	Node<T> temp = new Node<T>();
