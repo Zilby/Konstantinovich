@@ -3,14 +3,29 @@ import java.util.*;
 
 public class MyLinkedList<T>{
     
-    private Node<T> head=new Node<T>();
+    private Node<T> head;
+    private Node<T> tail;
     private int L = 0;
     
-    public void MyLinkedList(){
-	//head=new Node("head");
+    public MyLinkedList(){
+	head=new Node<T>();
+	tail=head;
     }
 
+    public void add(T s){
+	Node<T> temp = new Node<T>();
+	tail.setNext(temp);
+	tail=temp;
+	if(L>0){
+	    L++;
+	}
+    }
+	
+
     public void add(T s,int i){
+	if(i==L){
+	    add(s);
+	}
 	Node<T> temp = new Node<T>(s);
 	if(i==0){
 	    if(L!=0){
@@ -89,6 +104,10 @@ public class MyLinkedList<T>{
     }
 
     public int length(){
+	return L;
+    }
+
+    public int size(){
 	return L;
     }
 
