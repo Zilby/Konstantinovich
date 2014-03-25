@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
     
     private Node<T> head;
     private Node<T> tail;
@@ -10,6 +10,14 @@ public class MyLinkedList<T>{
     public MyLinkedList(){
 	head=new Node<T>();
 	tail=head;
+    }
+
+    public Iterator<T> iterator(){
+	return new MyLLIterator<T>(head);
+    }
+
+    public Iterator<T> iterator(Node<T> start){
+	return new MyLLIterator<T>(start);
     }
 
     public void add(T s){

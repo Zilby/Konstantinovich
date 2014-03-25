@@ -13,7 +13,6 @@ public class Driver{
 	System.out.println(LL.size());
 	LL.add("alpha");
 	System.out.println(LL.size());
-
 	System.out.println(LL.toString());
 	LL.add("bravo",0);
 	System.out.println(LL.toString());
