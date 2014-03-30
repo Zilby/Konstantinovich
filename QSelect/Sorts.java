@@ -3,6 +3,10 @@ import java.util.*;
 
 public class Sorts{
 
+    public static String name(){
+        return "Zilbersher,Alex";
+    }
+
     public static int partition(int[]L,int left,int right){
 	Random r = new Random();
 	int pindex = left + r.nextInt(right-left+1);
