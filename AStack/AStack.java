@@ -43,7 +43,7 @@ public class AStack<T>{
 
     public String toString(){
 	String output = "[";
-	for(int i=0;i<A.size();i++){
+	for(int i=A.size()-1;i>=0;i--){
 	    output = output+A.get(i).toString()+" ";
 	}
 	return output + "]";
@@ -51,17 +51,30 @@ public class AStack<T>{
 
     public static void main (String[] args){
 	
-	AStack<String> a = new AStack<String>();
+	// AStack<String> a = new AStack<String>();
+	// System.out.println(a);
+	// a.push("alpha");	
+	// System.out.println(a);
+	// a.push("bravo");
+	// a.push("charlie");
+	// a.push("delta");
+	// System.out.println(a);
+	// a.pop();
+	// System.out.println(a);
+	// System.out.println("a.search(bravo): "+a.search("bravo"));
+	// System.out.println("a.peek(): "+a.peek());
+
+	AStack<Double> a = new AStack<Double>();
 	System.out.println(a);
-	a.push("alpha");	
+	a.push(1.0);	
 	System.out.println(a);
-	a.push("bravo");
-	a.push("charlie");
-	a.push("delta");
+	a.push(2.0);
+	a.push(3.0);
+	a.push(4.0);
 	System.out.println(a);
 	a.pop();
 	System.out.println(a);
-	System.out.println("a.search(bravo): "+a.search("bravo"));
+	System.out.println("a.search(2): "+a.search(2.0));
 	System.out.println("a.peek(): "+a.peek());
 
     }
