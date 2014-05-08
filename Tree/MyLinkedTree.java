@@ -5,7 +5,6 @@ public class MyLinkedTree{
     
     private TNode head;
     private TNode temp;
-    //private int rows;
     
     public MyLinkedTree(){
     }
@@ -38,20 +37,87 @@ public class MyLinkedTree{
 		    temp.setRight(t);
 		    temp=head;
 		}else{
-		temp=temp.getRight();
-		insert(i);
+		    temp=temp.getRight();
+		    insert(i);
 		}
 	    }else{
 		if(temp.getLeft()==null){
 		    temp.setLeft(t);
 		    temp=head;
 		}else{
-		temp=temp.getLeft();
-		insert(i);
+		    temp=temp.getLeft();
+		    insert(i);
 		}
 	    }
 	}
     }
+
+    public boolean remove(int target){
+	//replace with largest element of smaller side 
+	//(unless leaf, then just remove)
+	//if only one child, then just skip that node in the tree
+	TNode t = find(target);
+	if(t==null){
+	    return false;
+	}
+	boolean R,L;
+	R=L=false;
+	if(t.getLeft()!=null){
+	    L=true;
+	}
+	if(t.getRight()!=null){
+	    R=true;
+	}
+	TNode n = findP(target);
+	if(!L&&!R){
+	    if(target==n.getRight().getData()){
+		n.setRight(null);
+	    }else{
+		n.setLeft(null);
+	    }
+	}
+	else if((L&&!R)||(!L&&R)){
+	    if(L){
+		n.setLeft(t.getLeft());
+	    }else{
+		n.setRight(t.getRight());
+	    }
+	}else{
+	    TNode r = t.getLeft();
+	    boolean notFirst = false;
+	    while(r.getRight()!=null){
+		r=r.getRight();
+		notFirst = true;
+	    }
+	    TNode l = findP(r.getData());
+	    if(notFirst){
+		l.setRight(null);
+	    }
+	    r.setRight(t.getRight());
+	    if(n.getRight().equals(t)){
+		n.setRight(r);
+	    }else{ 
+		n.setLeft(r);
+	    }
+	}
+	return true;
+    }
+    
+    public TNode findP(int target){
+	TNode t = temp;
+	if(target==temp.getRight().getData()||target==temp.getLeft().getData()){
+	    t = temp;
+	    temp=head;
+	    return t;
+	}else if(target>temp.getData()){
+	    temp=temp.getRight();
+	    return findP(target);
+	}else{
+	    temp=temp.getLeft();
+	    return findP(target);
+	}
+    }
+	
 
     public String toString(){
 	if(head==null){
@@ -63,14 +129,14 @@ public class MyLinkedTree{
     public String toStringHelper(TNode t){
 	String output = "";
 	boolean R,L;
-	R=L=false; 
+	R=L=false;
 	if(t.getLeft()!=null){
-	    output+=t.getLeft().getData();
+	    output+=t.getLeft().getData()+"<";
 	    L=true;
 	}
-	output+="<"+t.getData()+">";
+	output+=t.getData();
 	if(t.getRight()!=null){
-	    output+=t.getRight().getData();
+	    output+=">"+t.getRight().getData();
 	    R=true;
 	}
 	output+="\n";
@@ -81,111 +147,7 @@ public class MyLinkedTree{
 	}else if(R){
 	    return output+toStringHelper(t.getRight());
 	}else{
-	    return output;
+	    return "";
 	}
     }
-	
-
-    // public void add(T s,int i){
-    // 	if(i==L){
-    // 	    add(s);
-    // 	}
-    // 	Node<T> temp = new Node<T>(s);
-    // 	if(i==0){
-    // 	    if(L!=0){
-    // 		temp.setNext(head.getNext());
-    // 	    }	
-    // 	    head.setNext(temp);
-    // 	}else{
-    // 	    Node<T> current = getNode(i-1);
-    // 	    temp.setNext(current.getNext());
-    // 	    current.setNext(temp);
-    // 	}
-    // 	L++;
-    // }
-
-    // public void remove(int i)throws IndexOutOfBoundsException{
-    // 	if(i<0||i>L-1){
-    // 	    throw new IndexOutOfBoundsException("Index " + (i) + " is out of bounds");
-    // 	}
-    // 	if(i==0){
-    // 	    head.setNext(getNode(i+1));
-    // 	}else if(i==L-1){
-    // 	    getNode(i-1).setNext(null);
-    // 	}else{
-    // 	getNode(i-1).setNext(getNode(i+1));
-    // 	}
-    // 	L--;
-    // }
-
-    // //make it so   head or -1          0        1        2       }len = 3
-    // //                    [   ] -->  [   ] -->[   ] -->[   ]
-
-    // public Node<T> getNode(int position) throws IndexOutOfBoundsException{
-    // 	Node<T> temp = new Node<T>();
-    // 	if(position<0||position>L-1){
-    // 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
-    // 	}
-    // 	temp.setNext(head.getNext());
-    // 	while(position>0){
-    // 	    if(temp.getNext()==null){
-    // 		throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
-    // 	    }else{
-    // 		temp.setNext(temp.getNext().getNext());
-    // 	    }
-    // 	    position--;
-    // 	}
-    // 	return temp.getNext();
-    // }
-
-    // public T get(int position) throws IndexOutOfBoundsException{
-    // 	if(position<0||position>L-1){
-    // 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
-    // 	}
-    // 	return getNode(position).getData();
-    // }
-    
-
-    // public void set(int position,T newT) throws IndexOutOfBoundsException{
-    // 	if(position<0||position>L-1){
-    // 	    throw new IndexOutOfBoundsException("Index " + (position) + " is out of bounds");
-    // 	}
-    // 	getNode(position).setData(newT);
-    // }
-
-    // public int find(T s){
-    // 	Node<T> temp = new Node<T>();
-    // 	int current = 0;
-    // 	temp.setNext(head.getNext());
-    // 	while(temp.getNext()!=null){
-    // 	    if(temp.getNext().getData().equals(s)){
-    // 		return current;
-    // 	    }
-    // 	    temp.setNext(temp.getNext().getNext());
-    // 	    current++;
-    // 	}
-    // 	return -1;
-    // }
-
-    // public int length(){
-    // 	return L;
-    // }
-
-    // public int size(){
-    // 	return L;
-    // }
-
-    // public String toString(){
-    // 	String s="[";
-    // 	Node current=getNode(0);
-    // 	while(current!=null){
-    // 	    if(current.getNext()!=null){
-    // 		s+=current.getData()+",";
-    // 	    }else{
-    // 		s+=current.getData();
-    // 	    }
-    // 	    current=current.getNext();
-    // 	}
-    // 	return s+"]";
-    // }
 }

@@ -10,36 +10,36 @@ public class TNode{
     }
     
     public TNode(int data){
-	this.data=data;
-	right = null;
-	left = null;
+this.data=data;
+right = null;
+left = null;
     }
 
     public TNode getRight(){
-	return right;
+return right;
     }
 
     public TNode getLeft(){
-	return left;
+return left;
     }
 
     public int getData(){
-	return data;
+return data;
     }
 
     public void setRight(TNode next){
-	right=next;
+right=next;
     }
 
     public void setLeft(TNode next){
-	left=next;
+left=next;
     }
 
     public void setData(int data){
-	this.data=data;
+this.data=data;
     }
 
     public String toString(){
-	return ""+data;
+return ""+data;
     }
 }

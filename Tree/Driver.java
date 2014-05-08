@@ -22,5 +22,16 @@ public class Driver{
 	System.out.println(Tree.toString());
 	Tree.insert(87);
 	System.out.println(Tree.toString());
+	Tree.remove(34);
+	System.out.println(Tree.toString());
+	Tree.remove(87);
+	System.out.println(Tree.toString());
+	Tree.insert(87);
+	System.out.println(Tree.toString());
+	Tree.remove(23);
+	System.out.println(Tree.toString());
+	Tree.remove(56);
+	System.out.println(Tree.toString());
+
     }
 }
